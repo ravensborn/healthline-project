@@ -23,8 +23,6 @@ class Find extends Component
     public function processSearch(): void
     {
 
-        sleep(1);
-
         if ($this->search) {
 
             $patients = Patient::query();
