@@ -18,24 +18,24 @@
             <h6 class="border-bottom pb-2 mb-0">Quick Access</h6>
             <div class="d-flex text-body-secondary pt-3">
 
-                <a href="{{ route('dashboard.doctor-hub.index') }}" class="btn btn-outline-info btn-sm me-1">
+                <a style="max-width: 190px;" href="{{ route('dashboard.doctor-hub.index') }}" class="btn btn-outline-info btn-sm me-1">
                     <i class="bi bi-hourglass"></i>
                     Doctor Hub
                 </a>
 
 
-                <a href="{{ route('dashboard.queue.index') }}" class="btn btn-outline-info btn-sm me-1">
+                <a style="max-width: 190px;" href="{{ route('dashboard.queue.index') }}" class="btn btn-outline-info btn-sm me-1">
                     <i class="bi bi-hourglass"></i>
                     Queue Manager
                 </a>
 
 
-                <a href="{{ route('dashboard.patients.find') }}" class="btn btn-outline-info btn-sm me-1">
+                <a style="max-width: 190px;" href="{{ route('dashboard.patients.find') }}" class="btn btn-outline-info btn-sm me-1">
                     <i class="bi bi-search"></i>
                     Find Patient
                 </a>
 
-                <a href="{{ route('dashboard.patients.create') }}" class="btn btn-outline-info btn-sm me-1">
+                <a style="max-width: 190px;" href="{{ route('dashboard.patients.create') }}" class="btn btn-outline-info btn-sm me-1">
                     <i class="bi bi-plus"></i>
                     New Patient
                 </a>
