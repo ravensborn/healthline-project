@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard', ['clinic' => $clinic])
 
 @section('content')
 
@@ -17,16 +17,19 @@
                 <div class="bg-body rounded shadow-sm p-3 h-100">
                     <h5 class="h5">Quick Links</h5>
                     <p>
-                        <a href="{{ route('dashboard.overview') }}">Home</a>
+                        <a href="{{ route('dashboard.overview', ['clinic' => $clinic->slug]) }}">Home</a>
 
                         &nbsp;
-                        <a href="{{ route('dashboard.patients.create') }}">Create a new patient</a>
+                        <a href="{{ route('dashboard.patients.create', ['clinic' => $clinic->slug]) }}">Create a new
+                            patient</a>
                         &nbsp;
-                        <a href="{{ route('dashboard.patients.find') }}">Find patient</a>
+                        <a href="{{ route('dashboard.patients.find', ['clinic' => $clinic->slug]) }}">Find patient</a>
                         &nbsp;
-                        <a href="{{ route('dashboard.patients.edit', $patient->id) }}">Edit this patient's details</a>
+                        <a href="{{ route('dashboard.patients.edit', ['clinic' => $clinic->slug, 'patient' => $patient->id]) }}">Edit
+                            this patient's details</a>
                         &nbsp;
-                        <a href="{{ route('dashboard.patients.visits.create', $patient->id) }}">Create a visit for this patient</a>
+                        <a href="{{ route('dashboard.patients.visits.create', ['clinic' => $clinic->slug, 'patient' => $patient->id]) }}">Create
+                            a visit for this patient</a>
 
                     </p>
                 </div>
@@ -40,22 +43,22 @@
                     <hr>
                     <table class="table">
                         <tbody>
-                            <tr>
-                                <td>Name</td>
-                                <td>{{ $patient->name }}</td>
-                            </tr>
-                            <tr>
-                                <td>E-Mail Address</td>
-                                <td>{{ $patient->email }}</td>
-                            </tr>
-                            <tr>
-                                <td>Primary Phone Number</td>
-                                <td>{{ $patient->primary_phone_number }}</td>
-                            </tr>
-                            <tr>
-                                <td>Secondary Phone Number</td>
-                                <td>{{ $patient->secondary_phone_number }}</td>
-                            </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>{{ $patient->name }}</td>
+                        </tr>
+                        <tr>
+                            <td>E-Mail Address</td>
+                            <td>{{ $patient->email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Primary Phone Number</td>
+                            <td>{{ $patient->primary_phone_number }}</td>
+                        </tr>
+                        <tr>
+                            <td>Secondary Phone Number</td>
+                            <td>{{ $patient->secondary_phone_number }}</td>
+                        </tr>
 
                         </tbody>
                     </table>
@@ -68,30 +71,30 @@
                     <hr>
                     <table class="table">
                         <tbody>
-                            <tr>
-                                <td>Code</td>
-                                <td>{{ $patient->code }}</td>
-                            </tr>
-                            <tr>
-                                <td>Gender</td>
-                                <td>{{ $patient->gender }}</td>
-                            </tr>
-                            <tr>
-                                <td>Birthdate</td>
-                                <td>{{ $patient->birthdate }}</td>
-                            </tr>
-                            <tr>
-                                <td>Ethnicity</td>
-                                <td>{{ $patient->ethnicity }}</td>
-                            </tr>
-                            <tr>
-                                <td>Occupation</td>
-                                <td>{{ $patient->occupation }}</td>
-                            </tr>
-                            <tr>
-                                <td>Address</td>
-                                <td>{{ $patient->governorate->name . ' - ' . $patient->district->name . ' - ' . $patient->subDistrict->name }}</td>
-                            </tr>
+                        <tr>
+                            <td>Code</td>
+                            <td>{{ $patient->code }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>{{ $patient->gender }}</td>
+                        </tr>
+                        <tr>
+                            <td>Birthdate</td>
+                            <td>{{ $patient->birthdate }}</td>
+                        </tr>
+                        <tr>
+                            <td>Ethnicity</td>
+                            <td>{{ $patient->ethnicity }}</td>
+                        </tr>
+                        <tr>
+                            <td>Occupation</td>
+                            <td>{{ $patient->occupation }}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>{{ $patient->governorate->name . ' - ' . $patient->district->name . ' - ' . $patient->subDistrict->name }}</td>
+                        </tr>
 
                         </tbody>
                     </table>

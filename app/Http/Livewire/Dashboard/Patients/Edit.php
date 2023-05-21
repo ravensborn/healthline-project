@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Dashboard\Patients;
 
+use App\Models\Clinic;
 use App\Models\District;
 use App\Models\Governorate;
 use App\Models\Patient;
@@ -11,7 +12,7 @@ use Livewire\Component;
 
 class Edit extends Component
 {
-
+    public $clinic;
     public Collection $governorates;
     public Collection $districts;
     public Collection $subDistricts;
@@ -53,7 +54,7 @@ class Edit extends Component
 
         $this->patient->update($validated);
 
-        return redirect()->route('dashboard.patients.show', ['patient' => $this->patient->id]);
+        return redirect()->route('dashboard.patients.show', ['clinic' => $this->clinic->slug, 'patient' => $this->patient->id]);
 
     }
 
@@ -81,12 +82,11 @@ class Edit extends Component
 
         $this->districts = collect();
         $this->subDistricts = collect();
-
     }
 
-    public function mount(Patient $patient): void
+    public function mount(Clinic $clinic, Patient $patient): void
     {
-
+        $this->clinic = $clinic;
         $this->patient = $patient;
 
         $this->name = $patient->name;
@@ -104,9 +104,6 @@ class Edit extends Component
         $this->loadGovernorates();
         $this->updatedGovernorateId();
         $this->updatedDistrictId();
-
-
-
     }
 
     public function render()

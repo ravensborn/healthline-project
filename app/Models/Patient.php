@@ -37,4 +37,9 @@ class Patient extends Model
         return $this->hasMany(Visit::class);
     }
 
+    public function clinic(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Clinic::class);
+    }
+
 }

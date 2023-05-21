@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard', ['clinic' => $clinic])
 
 @section('content')
 
@@ -17,9 +17,9 @@
                 <div class="bg-body rounded shadow-sm p-3 h-100">
                     <h5 class="h5">Quick Links</h5>
                     <p>
-                        <a href="{{ route('dashboard.overview') }}">Home</a>
+                        <a href="{{ route('dashboard.overview', ['clinic' => $clinic->slug]) }}">Home</a>
                         &nbsp;
-                        <a href="{{ route('dashboard.patients.find') }}">Find patient</a>
+                        <a href="{{ route('dashboard.patients.find', ['clinic' => $clinic->slug]) }}">Find patient</a>
                     </p>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     </p>
                     <hr>
 
-                    @livewire('dashboard.patients.create')
+                    @livewire('dashboard.patients.create', ['clinic' => $clinic->id])
 
                 </div>
             </div>

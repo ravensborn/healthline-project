@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Dashboard\Patients;
 
+use App\Models\Clinic;
 use App\Models\Patient;
 use Illuminate\Support\Collection;
 use Livewire\Component;
@@ -9,7 +10,7 @@ use Livewire\Component;
 class Find extends Component
 {
 
-
+    public $clinic;
     public Collection $patients;
 
     public string $search = '';
@@ -27,23 +28,27 @@ class Find extends Component
 
             $patients = Patient::query();
 
+
             $search = '%' . $this->search . '%';
 
-            $patients->where('code', 'LIKE', $search)
-                ->orWhere('name', 'LIKE', $search)
-                ->orWhere('email', 'LIKE', $search)
-                ->orWhere('primary_phone_number', 'LIKE', $search)
-                ->orWhere('secondary_phone_number', 'LIKE', $search);
+            $patients->where(function ($patients) use ($search) {
+                $patients->where('code', 'LIKE', $search)
+                    ->orWhere('name', 'LIKE', $search)
+                    ->orWhere('email', 'LIKE', $search)
+                    ->orWhere('primary_phone_number', 'LIKE', $search)
+                    ->orWhere('secondary_phone_number', 'LIKE', $search);
+            });
+
+            $patients->where('clinic_id', $this->clinic->id);
 
             $this->patients = $patients->limit(5)->get();
         }
     }
 
-    public function mount(): void
+    public function mount(Clinic $clinic): void
     {
-
+        $this->clinic = $clinic;
         $this->patients = collect();
-
     }
 
     public function render()

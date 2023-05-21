@@ -27,7 +27,7 @@
             <div class="col-12 col-md-10 offset-md-1">
 
                 @forelse($patients as $patient)
-                    <a href="{{ route('dashboard.patients.show', $patient->id) }}" class="text-decoration-none text-body">
+                    <a href="{{ route('dashboard.patients.show', ['clinic' => $clinic->slug, 'patient' => $patient->id]) }}" class="text-decoration-none text-body">
                         <div class="d-flex justify-content-between text-body-secondary p-3 mt-3 rounded border">
                             <div class="d-flex">
                                 <div>
@@ -44,13 +44,13 @@
                                 </div>
                             </div>
                             <div>
-                                <a href="{{ route('dashboard.patients.visits.create', $patient->id) }}" class="btn btn-sm btn-outline-primary">Create Visit</a>
+                                <a href="{{ route('dashboard.patients.visits.create', ['clinic' => $clinic->slug, 'patient' => $patient->id]) }}" class="btn btn-sm btn-outline-primary">Create Visit</a>
                             </div>
                         </div>
                     </a>
                 @empty
                     <p class="text-center mt-5">
-                        No patients found, please broaden your search query or <a href="{{ route('dashboard.patients.create') }}">create a new patient</a>.
+                        No patients found, please broaden your search query or <a href="{{ route('dashboard.patients.create', ['clinic' => $clinic->slug]) }}">create a new patient</a>.
                     </p>
                 @endforelse
             </div>

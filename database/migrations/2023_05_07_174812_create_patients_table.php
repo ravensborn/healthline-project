@@ -42,6 +42,13 @@ return new class extends Migration {
                 ->on('sub_districts')
                 ->restrictOnDelete();
 
+            $table->unsignedBigInteger('clinic_id');
+            $table->foreign('clinic_id')
+                ->references('id')
+                ->on('clinics')
+                ->cascadeOnDelete();
+
+
             $table->timestamps();
         });
     }

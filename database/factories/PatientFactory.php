@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Clinic;
 use App\Models\District;
 use App\Models\Governorate;
 use App\Models\SubDistrict;
@@ -36,6 +37,8 @@ class PatientFactory extends Factory
             'governorate_id' => $this->faker->randomElement(Governorate::all()),
             'district_id' => $this->faker->randomElement(District::all()),
             'sub_district_id' => $this->faker->randomElement(SubDistrict::all()),
+//            'clinic_id' => $this->faker->randomElement(Clinic::all()),
+            'clinic_id' => $this->faker->randomElement([1]),
         ];
     }
 }

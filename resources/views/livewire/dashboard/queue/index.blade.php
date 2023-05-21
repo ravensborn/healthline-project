@@ -63,7 +63,7 @@
 
         @empty
             <p class="text-center mt-5">
-                You have no visits for today, <a href="{{ route('dashboard.patients.find') }}">find a patient</a> and
+                You have no visits for today, <a href="{{ route('dashboard.patients.find', ['clinic' => $clinic->slug]) }}">find a patient</a> and
                 create a visit to get started.
             </p>
         @endforelse

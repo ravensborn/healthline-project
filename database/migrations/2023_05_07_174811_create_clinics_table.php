@@ -13,12 +13,21 @@ return new class extends Migration {
         Schema::create('clinics', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
+            $table->longText('description');
 
             $table->unsignedBigInteger('entity_id');
             $table->foreign('entity_id')
                 ->references('id')
                 ->on('entities')
                 ->restrictOnDelete();
+
+            $table->unsignedBigInteger('patient_visit_form_id')
+            ->nullable();
+            $table->foreign('patient_visit_form_id')
+                ->references('id')
+                ->on('forms')
+                ->cascadeOnDelete();
 
             $table->timestamps();
         });

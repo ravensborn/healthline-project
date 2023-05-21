@@ -13,9 +13,11 @@ return new class extends Migration {
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
 
-
             $table->unsignedBigInteger('patient_id');
             $table->foreign('patient_id')->references('id')->on('patients')->cascadeOnDelete();
+
+            $table->unsignedBigInteger('clinic_id');
+            $table->foreign('clinic_id')->references('id')->on('clinics')->cascadeOnDelete();
 
             $table->enum('status', [
                 'pending',
@@ -23,7 +25,7 @@ return new class extends Migration {
                 'done',
             ]);
 
-            $table->string('description')->nullable();
+            $table->json('form_response')->nullable();
 
             $table->json('properties')->nullable();
 

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard', ['clinic' => $clinic])
 
 @section('content')
 
@@ -18,7 +18,7 @@
                     <h5 class="h5">Quick Links</h5>
                     <p class="mt-3">
 
-                        <a href="{{ route('dashboard.patients.find') }}" class="btn btn-outline-info btn-sm me-1">
+                        <a href="{{ route('dashboard.patients.find', ['clinic' => $clinic->slug]) }}" class="btn btn-outline-info btn-sm me-1">
                             <i class="bi bi-search"></i>
                             Find Patient
                         </a>
@@ -32,7 +32,7 @@
             <div class="col-12">
                 <div class="bg-body rounded shadow-sm p-3">
 
-                    @livewire('dashboard.queue.index')
+                    @livewire('dashboard.queue.index', ['clinic' => $clinic->id])
 
                 </div>
             </div>

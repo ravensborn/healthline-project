@@ -2,13 +2,61 @@
     <form wire:submit.prevent="store">
 
         <div class="row">
-            <div class="col-12 col-md-6 offset-md-3">
-                <label for="description" class="form-label">Brief Description <small class="text-danger">*</small></label>
-                <input type="text" class="form-control" id="description" wire:model="description">
-                @error('description')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
-            </div>
+            @forelse($form->fields as  $field)
+
+                @if($field['type'] == \App\Models\Form::FIELD_TYPE_TEXT || $field['type'] == \App\Models\Form::FIELD_TYPE_NUMBER)
+                    <div class="col-12 col-md-6 offset-md-3 mt-3">
+                        <label for="{{ $field['name'] }}"
+                               class="form-label">
+                            {{ $field['display_name'] }}
+                        </label>
+                        <input type="{{ $field['type'] }}"
+                               class="form-control"
+                               id="{{ $field['name'] }}"
+                               wire:model="response.{{ $field['name'] }}">
+                        @error('response.' . $field['name'])
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                @endif
+
+                @if($field['type'] == \App\Models\Form::FIELD_TYPE_TEXTAREA)
+                    <div class="col-12 col-md-6 offset-md-3 mt-3">
+                        <label for="{{ $field['name'] }}"
+                               class="form-label">
+                            {{ $field['display_name'] }}
+                        </label>
+                        <textarea id="{{ $field['name'] }}"
+                                  class="form-control"
+                                  wire:model="response.{{ $field['name'] }}">
+                            </textarea>
+                        @error('response.' . $field['name'])
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                @endif
+
+                @if($field['type'] == \App\Models\Form::FIELD_TYPE_FILE)
+                    <div class="col-12 col-md-6 offset-md-3 mt-3">
+                        <label for="{{ $field['name'] }}"
+                               class="form-label">
+                            {{ $field['display_name'] }}
+                        </label>
+                        <input type="{{ $field['type'] }}"
+                               class="form-control"
+                               id="{{ $field['name'] }}"
+                               wire:model="response.{{ $field['name'] }}">
+                        @error('response.' . $field['name'])
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                @endif
+
+            @empty
+                <div class="text-center text-warning">
+                    No questions found in visitor addmission form, please <a href="{{ route('dashboard.forms.index', ['clinic' => $clinic->slug]) }}">click here to modify your questions</a>.
+                </div>
+            @endforelse
         </div>
 
 

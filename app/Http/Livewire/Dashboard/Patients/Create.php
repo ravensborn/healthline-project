@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Dashboard\Patients;
 
+use App\Models\Clinic;
 use App\Models\District;
 use App\Models\Governorate;
 use App\Models\Patient;
@@ -12,7 +13,7 @@ use Livewire\Component;
 
 class Create extends Component
 {
-
+    public $clinic;
     public Collection $governorates;
     public Collection $districts;
     public Collection $subDistricts;
@@ -54,11 +55,12 @@ class Create extends Component
         $validated = $this->validate($rules);
 
         $validated['code'] = Str::random(9);
+        $validated['clinic_id'] = $this->clinic->id;
 
         $patient = new Patient;
         $patient = $patient->create($validated);
 
-        return redirect()->route('dashboard.patients.show', ['patient' => $patient->id]);
+        return redirect()->route('dashboard.patients.show', ['clinic' => $this->clinic->slug, 'patient' => $patient->id]);
 
     }
 
@@ -91,9 +93,9 @@ class Create extends Component
         }
     }
 
-    public function mount(): void
+    public function mount(Clinic $clinic): void
     {
-
+        $this->clinic = $clinic;
         $this->loadGovernorates();
 
 //        if($this->cities->count() > 0) {
