@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Website;
+use App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,11 +34,44 @@ Route::get('/', [Website\PageController::class, 'welcome'])
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::middleware(['permission:super-admin'])->group(function () {
+
+        Route::get('/admin', [Admin\PageController::class, 'index'])
+            ->name('admin.index');
+
+        Route::get('/admin/users', [Admin\UserController::class, 'index'])
+            ->name('admin.users.index');
+
+        Route::get('/admin/users/create', [Admin\UserController::class, 'create'])
+            ->name('admin.users.create');
+
+        Route::get('/admin/entities', [Admin\EntityController::class, 'index'])
+            ->name('admin.entities.index');
+
+        Route::get('/admin/entities/create', [Admin\EntityController::class, 'create'])
+            ->name('admin.entities.create');
+
+        Route::get('/admin/entities/{entity}/edit', [Admin\EntityController::class, 'edit'])
+            ->name('admin.entities.edit');
+
+        Route::get('/admin/entities/{entity}/clinics', [Admin\ClinicController::class, 'index'])
+            ->name('admin.entities.clinics.index');
+
+        Route::get('/admin/entities/{entity}/clinics/create', [Admin\ClinicController::class, 'create'])
+            ->name('admin.entities.clinics.create');
+
+        Route::get('/admin/entities/{entity}/clinics/{clinic}/edit', [Admin\ClinicController::class, 'edit'])
+            ->name('admin.entities.clinics.edit');
+
+        Route::get('/admin/access', [Admin\AccessController::class, 'index'])
+            ->name('admin.access.index');
+
+    });
+
     Route::get('/my-space', [Website\PageController::class, 'mySpace'])
         ->name('home');
 
     Route::middleware('checkClinicMembership')->prefix('{clinic:slug}/dashboard')->as('dashboard.')->group(function () {
-
 
         Route::get('/', [Dashboard\PageController::class, 'overview'])
             ->name('overview');

@@ -17,6 +17,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+        $superAdminPermission = Permission::create([
+            'name' => 'super-admin',
+        ]);
+
         $manageFormsPermission = Permission::create([
             'name' => 'manage forms',
         ]);
@@ -78,6 +82,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $clinicArray = Clinic::all()->pluck('id');
+
         $yad->clinics()->attach($clinicArray);
         $rekar->clinics()->attach($clinicArray);
         $ragr->clinics()->attach($clinicArray);
@@ -85,6 +90,7 @@ class DatabaseSeeder extends Seeder
         $imad->clinics()->attach($clinicArray);
 
         $yad->assignRole($doctorRole);
+        $yad->givePermissionTo($superAdminPermission);
         $rekar->assignRole($doctorRole);
 
         $ragr->assignRole($secretaryRole);
