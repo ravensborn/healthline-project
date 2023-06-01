@@ -24,9 +24,11 @@ class ClinicFactory extends Factory
         return [
             'name' => ucfirst($this->faker->name),
             'slug' => '',
+            'description' => $this->faker->paragraph(4),
+            'subscription' => $this->faker->date,
             'entity_id' => $entity->id,
             'patient_visit_form_id' => null,
-            'description' => $this->faker->paragraph(4),
+
 
         ];
     }

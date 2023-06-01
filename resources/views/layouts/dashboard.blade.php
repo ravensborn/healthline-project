@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -94,7 +94,7 @@
 <!-- Main Navbar -->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('dashboard.overview', ['clinic' => $clinic->slug]) }}">{{ config('env.APP_NAME') }}</a>
+        <a class="navbar-brand" href="{{ route('home') }}">{{ config('env.APP_NAME') }}</a>
         <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

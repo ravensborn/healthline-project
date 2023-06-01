@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->string('slug');
             $table->longText('description');
 
+            $table->date('subscription')->default(today()->startOfMonth());
+
             $table->unsignedBigInteger('entity_id');
             $table->foreign('entity_id')
                 ->references('id')

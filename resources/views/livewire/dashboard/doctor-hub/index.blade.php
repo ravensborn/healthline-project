@@ -1,8 +1,6 @@
 <div>
-
     <div>
-
-        <div class="row mb-3" wire:poll.keep-alive="updateStats">
+        <div class="row mb-3" wire:poll.keep-alive="initPoll">
             <div class="col-6 col-md-3">
                 <div class="bg-body rounded shadow-sm p-3 h-100">
                     <h5>Total visits today</h5>
@@ -36,7 +34,6 @@
             {{--                </div>--}}
             {{--            </div>--}}
         </div>
-
 
         @if($visit)
 
@@ -157,8 +154,6 @@
                     </div>
                 </div>
             </div>
-
         @endif
     </div>
-
 </div>

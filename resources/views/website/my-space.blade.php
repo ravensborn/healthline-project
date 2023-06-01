@@ -12,6 +12,9 @@
                 Welcome back <span class="fw-bold">{{ auth()->user()->name }}</span>, please select your desiered clinic
                 to start processing patients.
             </p>
+            @can('super-admin')
+                <a href="{{ route('admin.index') }}">Access Admin Dashboard</a>
+            @endif
         </div>
     </div>
 
@@ -24,6 +27,7 @@
                         <div class="card-header d-flex justify-content-between">
 
                             <div class="fw-bold">
+                                <i class="bi bi-box me-1"></i>
                                 {{ $clinic->name }}'s Clinic
                             </div>
 

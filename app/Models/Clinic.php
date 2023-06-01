@@ -13,6 +13,10 @@ class Clinic extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'subscription' => 'date'
+    ];
+
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
@@ -31,10 +35,8 @@ class Clinic extends Model
     }
 
     public function isActive() : bool {
-        return true;
+        return $this->subscription > today();
     }
-
-
 
     public function patients(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

@@ -43,6 +43,13 @@ class ClinicsTable extends DataTableComponent
             Column::make("#", "id"),
             Column::make("Name", "name")
                 ->searchable(),
+            Column::make("Subscription", "subscription")
+                ->format(function ($value, $row) {
+
+                    $color = $row->isActive() ? 'success' : 'danger';
+                    return '<span class="badge bg-' . $color . '">' . $value->format('Y-m-d') . '</span>';
+
+                })->html(),
             Column::make("Created", "created_at")
                 ->format(function ($value) {
                     return $value->format('Y-m-d / h:i A');
@@ -50,7 +57,8 @@ class ClinicsTable extends DataTableComponent
             Column::make("Actions", "id")->format(function ($id, $row, $column) {
                 $deleteBtn = '<button wire:click="triggerDeleteItem(' . $id . ')"  class="btn btn-danger btn-sm me-1"><i class="bi bi-trash"></i></button>';
                 $editBtn = '<a href="' . route('admin.entities.clinics.edit', ['entity' => $this->entity->id, 'clinic' => $id]) . '" class="btn btn-warning btn-sm me-1"><i class="bi bi-pen"></i></a>';
-                return $editBtn . $deleteBtn;
+                $manageSubscription = '<a href="' . route('admin.entities.clinics.manage-subscription', ['entity' => $this->entity->id, 'clinic' => $id]) . '" class="btn btn-info btn-sm me-1"><i class="bi bi-calendar-date"></i> Manage Subscription</a>';
+                return $manageSubscription . $editBtn . $deleteBtn;
             })->html(),
 
         ];

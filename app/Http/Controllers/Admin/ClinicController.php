@@ -31,5 +31,13 @@ class ClinicController extends Controller
         ]);
     }
 
+    public function manageSubscription(Entity $entity, Clinic $clinic)
+    {
+        return view('admin.entities.clinics.manage-subscription', [
+            'entity' => $entity,
+            'clinic' => $clinic,
+        ]);
+    }
+
 
 }

@@ -39,12 +39,8 @@ class Index extends Component
         $this->missedPatientsToday = 14;
     }
 
-    public function mount(Clinic $clinic): void
+    public function getVisit(): void
     {
-        $this->clinic = $clinic;
-
-        $this->updateStats();
-
         $this->visit = Visit::where('clinic_id', $this->clinic->id)
             ->where('status', Visit::STATUS_AT_DOCTOR)
             ->first();
@@ -52,6 +48,21 @@ class Index extends Component
         if($this->visit) {
             $this->patient = $this->visit->patient;
         }
+    }
+
+    public function initPoll(): void
+    {
+        $this->updateStats();
+        $this->getVisit();
+    }
+
+    public function mount(Clinic $clinic): void
+    {
+        $this->clinic = $clinic;
+
+        $this->updateStats();
+        $this->getVisit();
+
 
     }
 

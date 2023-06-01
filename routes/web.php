@@ -63,6 +63,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/entities/{entity}/clinics/{clinic}/edit', [Admin\ClinicController::class, 'edit'])
             ->name('admin.entities.clinics.edit');
 
+        Route::get('/admin/entities/{entity}/clinics/{clinic}/manage-subscription', [Admin\ClinicController::class, 'manageSubscription'])
+            ->name('admin.entities.clinics.manage-subscription');
+
         Route::get('/admin/access', [Admin\AccessController::class, 'index'])
             ->name('admin.access.index');
 
@@ -71,7 +74,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my-space', [Website\PageController::class, 'mySpace'])
         ->name('home');
 
-    Route::middleware('checkClinicMembership')->prefix('{clinic:slug}/dashboard')->as('dashboard.')->group(function () {
+    Route::middleware(['checkClinicMembership', 'checkClinicSubscription'])->prefix('{clinic:slug}/dashboard')->as('dashboard.')->group(function () {
 
         Route::get('/', [Dashboard\PageController::class, 'overview'])
             ->name('overview');
